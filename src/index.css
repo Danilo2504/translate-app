@@ -1,11 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import "tailwindcss";
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --color-slate: #4D5562;
+  --color-white: #F9FAFB;
+  --color-light-gray: #D2D5DA;
+  --color-dark-slate: #394150;
+  --color-black: #040711;
+  --color-blue: #263FA9;
+  --color-light-blue: #7CA9F3;
+  --color-semi-black: #121826CC;
+  --color-semi-dark: #212936CC;
+
+  font-family: "DM Sans", sans-serif;
+  font-style: normal;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-white);
+  background-color: var(--color-black);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,50 +28,74 @@
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  font-weight: 800;
+  display: inline-block;
+  color: var(--color-light-gray);
+  font-size: 0.875rem;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  border-radius: 12px;
+  padding: 6px 10px;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-white);
+  background-color: var(--color-slate);
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  background-image: url('./assets/images/hero_img.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-white);
+  background-color: var(--color-blue);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-light-blue);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+button.secondary{
+  background-color: transparent;
+  color: var(--color-slate);
+  border: 1px solid var(--color-slate);
+  padding: 8px;
+}
+
+button.secondary:hover {
+  background-color: var(--color-slate);
+  color: var(--color-white);
+}
+
+button.secondary:hover svg{
+  stroke: var(--color-white);
+  fill: var(--color-white);
+  color: var(--color-white)
+}
+
+@media (width <= 768px){
+  body {
+    background-image: url('./assets/images/hero_img-sm.jpg');
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: var(--color-white);
   }
   a:hover {
     color: #747bff;
