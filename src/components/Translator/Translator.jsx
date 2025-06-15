@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Presentational from "./Presentational";
 import { getTranslation } from "../../requests/getTranslation";
 import { INITIAL_LANGUAGES, INITIAL_VALUES, MAX_CHARS, TYPES } from "../../utils/constants";
+import LoaderContext from "../../contexts/LoaderContext";
 
 
 
 const Translator = () => {
+   const {showLoader, hideLoader} = useContext(LoaderContext);
    const [values, setValues] = useState(INITIAL_VALUES);
    const [languages, setLanguages] = useState(INITIAL_LANGUAGES);
 
@@ -53,13 +55,16 @@ const Translator = () => {
    }
 
    const makeTranslation = async ({languages, values}) => {
+      showLoader();
       const langString = `${languages.input}|${languages.output}`;
       const res = await getTranslation(values.input, langString);
       if (res.responseStatus === 200 && res.responseData.translatedText) {
+         hideLoader();
          return res.responseData.translatedText;
       } else {
          console.error("Translation failed: ", res.responseStatus, res.responseDetails);
-         return '';
+         hideLoader();
+         return values.input;
       }
    }
 

@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Presentational from "./Presentational";
+import LoaderContext from "../../contexts/LoaderContext";
 
 const TranslationCard = ({type, value, setValue, language, setLanguage, onClick, maxChars, onClear}) => {
+  const {showLoader, hideLoader} = useContext(LoaderContext);
   const [isCopied, setIsCopied] = useState(false);
   
   const speakText = (text) => {
-    const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = language;
-    speechSynthesis.speak(speech);
+    showLoader();
+    setTimeout(() => {
+      const speech = new SpeechSynthesisUtterance(text);
+      speech.lang = language;
+      speechSynthesis.speak(speech);
+      hideLoader();
+    }, 300);
   }
 
   const copyToClipboard = async (text) => {

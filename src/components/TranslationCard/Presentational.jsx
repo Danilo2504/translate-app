@@ -2,6 +2,7 @@ import SortAlfa from '../../assets/images/sort_alfa.svg?react';
 import SoundMax from '../../assets/images/sound_max_fill.svg?react';
 import CopyClipboard from '../../assets/images/copy_clipboard.svg?react';
 import LanguagesDropdown from '../LanguagesDropdown';
+import { debounce } from '../../utils/helpers';
 
 const Presentational = ({type, value, setValue, language, setLanguage, onClick, maxChars, copyToClipboard, isCopied, speakText, clearText}) => {
   const cardClasses = type === 'input' ? 'bg-[var(--color-semi-dark)]' : 'bg-[var(--color-semi-black)]';
@@ -16,7 +17,7 @@ const Presentational = ({type, value, setValue, language, setLanguage, onClick, 
       </div>
       <div className="flex justify-between items-center">
         <div className="flex space-x-2">
-          <button type="button" onClick={() => speakText(value)} className="secondary"><SoundMax/></button>
+          <button type="button" onClick={() => debounce(speakText(value))} className="secondary"><SoundMax/></button>
           <div className='relative'>
             {isCopied && (
               <span className="bg-white rounded-xl px-3 py-1.5 absolute -top-9 left-1/2 -translate-1/2 text-black shadow after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2
@@ -25,7 +26,7 @@ const Presentational = ({type, value, setValue, language, setLanguage, onClick, 
             <button type="button" className="secondary" onClick={() => copyToClipboard(value)}><CopyClipboard/></button>
           </div>
         </div>
-        {type === 'input' && <button type="button" onClick={(event) => onClick({event})} className="flex items-center"><SortAlfa className="me-1"/>Translate</button>}
+        {type === 'input' && <button type="button" onClick={(event) => debounce(onClick({event}))} className="flex items-center"><SortAlfa className="me-1"/>Translate</button>}
       </div>
     </div>
   );
